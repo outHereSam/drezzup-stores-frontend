@@ -15,4 +15,11 @@ export const routes: Routes = [
         (c) => c.RegisterComponent
       ),
   },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./features/home/home/home.component').then(
+        (c) => c.HomeComponent
+      ),
+  },
 ];

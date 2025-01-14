@@ -47,8 +47,8 @@ export class LoginComponent implements OnInit {
     const { email, password } = this.loginForm.value;
 
     this.authService.login(email, password).subscribe({
-      next: (response) => {
-        console.log(response);
+      next: () => {
+        this.router.navigateByUrl('');
       },
       error: (error) => {
         this.error.set(error.error?.message || 'An error occurred');
