@@ -1,0 +1,17 @@
+@use '../../../../styles/_variables' as *
+@use '../../../../styles/_functions' as *
+@use '../../../../styles/_mixins' as *
+
+
+main
+    background-color: $bg-gray
+    height: 100%
+    @include flexbox($justify: null, $align: null, $direction: row)
+    
+
+    .content
+        flex: 1
+        background: #FAFAFA
+        margin: 16px
+        border-radius: 8px
+        padding: 24px

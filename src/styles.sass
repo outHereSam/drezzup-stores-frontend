@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/_base.sass' as *
+@use './styles/_variables' as *
+@use './styles/_mixins' as *
+@use './styles/_functions' as *
+
+
+body
+    color: $text-main
+    height: 100vh
+
+body, button, input
+    font-family: $font-stack
+    

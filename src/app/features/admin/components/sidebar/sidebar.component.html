@@ -1,0 +1,80 @@
+<nav>
+  <div class="top">
+    <h1 class="logo">Drezzup Stores</h1>
+
+    <ul class="links">
+      <li>
+        <a
+          routerLinkActive="activeLink"
+          [routerLinkActiveOptions]="{ exact: true }"
+          routerLink="/admin"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            style="fill: #71717a"
+          >
+            <path
+              d="M20 12a2 2 0 0 0-.703.133l-2.398-1.963c.059-.214.101-.436.101-.67C17 8.114 15.886 7 14.5 7S12 8.114 12 9.5c0 .396.1.765.262 1.097l-2.909 3.438A2.06 2.06 0 0 0 9 14c-.179 0-.348.03-.512.074l-2.563-2.563C5.97 11.348 6 11.179 6 11c0-1.108-.892-2-2-2s-2 .892-2 2 .892 2 2 2c.179 0 .348-.03.512-.074l2.563 2.563A1.906 1.906 0 0 0 7 16c0 1.108.892 2 2 2s2-.892 2-2c0-.237-.048-.46-.123-.671l2.913-3.442c.227.066.462.113.71.113a2.48 2.48 0 0 0 1.133-.281l2.399 1.963A2.077 2.077 0 0 0 18 14c0 1.108.892 2 2 2s2-.892 2-2-.892-2-2-2z"
+            ></path></svg
+          >Analytics</a
+        >
+      </li>
+      <li>
+        <a routerLinkActive="activeLink" routerLink="/admin/inventory">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            style="fill: #71717a"
+          >
+            <path
+              d="M20 3H4a2 2 0 0 0-2 2v2a2 2 0 0 0 1 1.72V19a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.72A2 2 0 0 0 22 7V5a2 2 0 0 0-2-2zM4 5h16v2H4zm1 14V9h14v10z"
+            ></path>
+            <path d="M8 11h8v2H8z"></path></svg
+          >Inventory</a
+        >
+      </li>
+      <li>
+        <a routerLinkActive="activeLink" routerLink="/admin/orders"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            style="fill: #71717a"
+          >
+            <path
+              d="M21 11h-3V4a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v14c0 1.654 1.346 3 3 3h14c1.654 0 3-1.346 3-3v-6a1 1 0 0 0-1-1zM5 19a1 1 0 0 1-1-1V5h12v13c0 .351.061.688.171 1H5zm15-1a1 1 0 0 1-2 0v-5h2v5z"
+            ></path>
+            <path d="M6 7h8v2H6zm0 4h8v2H6zm5 4h3v2h-3z"></path></svg
+          >Orders</a
+        >
+      </li>
+    </ul>
+  </div>
+
+  <div class="bottom">
+    <div class="user">
+      <div class="info">
+        <div class="avatar"></div>
+        <p class="name">John Doe</p>
+      </div>
+      <button class="options">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          style="fill: rgba(15, 23, 42, 1)"
+        >
+          <path
+            d="M12 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+          ></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>

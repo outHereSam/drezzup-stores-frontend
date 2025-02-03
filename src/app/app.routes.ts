@@ -22,4 +22,34 @@ export const routes: Routes = [
         (c) => c.HomeComponent
       ),
   },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./features/admin/dashboard/dashboard.component').then(
+        (c) => c.DashboardComponent
+      ),
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import('./features/admin/analytics/analytics.component').then(
+            (c) => c.AnalyticsComponent
+          ),
+      },
+      {
+        path: 'inventory',
+        loadComponent: () =>
+          import('./features/admin/inventory/inventory.component').then(
+            (c) => c.InventoryComponent
+          ),
+      },
+      {
+        path: 'orders',
+        loadComponent: () =>
+          import('./features/admin/orders/orders.component').then(
+            (c) => c.OrdersComponent
+          ),
+      },
+    ],
+  },
 ];

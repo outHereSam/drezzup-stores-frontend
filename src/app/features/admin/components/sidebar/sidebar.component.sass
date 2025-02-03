@@ -1,0 +1,63 @@
+@use '../../../../../styles/_variables' as *
+@use '../../../../../styles/_functions' as *
+@use '../../../../../styles/_mixins' as *
+
+nav
+    height: 100%
+    // margin: 16px 0 0 0
+    padding: 16px
+    @include flexbox($justify: space-between, $direction: column)
+    
+
+    .logo
+        font-size: 20px
+        text-transform: uppercase
+        margin: 16px 0 0 0
+       
+    ul
+        margin: 24px 0 0 0
+        @include flexbox($justify: null, $align: null, $gap: 8px, $direction: column)
+        
+
+        li
+            list-style-type: none
+
+            a
+                @include flexbox($justify: null, $align: center, $gap: 8px, $direction: row)
+                text-decoration: none
+                font-size: 14px
+                color: $text-secondary
+                padding: 0.5rem
+                border-radius: 0.25rem
+
+                &:hover
+                    background-color: $gray-hover
+
+            .activeLink
+                background-color: $active-link
+
+    .bottom
+        .user
+            @include flexbox($justify: space-between, $align: center)
+            
+            .info
+                @include flexbox($justify: space-between, $align: center)
+
+                .avatar
+                    width: 32px
+                    height: 32px
+                    border-radius: 50%
+                    background-color: #ccc
+                    margin-right: 8px
+
+                .name 
+                    font-size: 14px
+                    font-weight: 600
+
+            .options
+                border: none
+                background: none
+                cursor: pointer
+
+
+            
