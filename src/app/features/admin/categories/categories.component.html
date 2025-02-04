@@ -1,0 +1,41 @@
+<h1 class="title">Categories</h1>
+<p class="kicker">Manage product categories.</p>
+
+<button class="add" (click)="openCategoryDialog()">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    style="fill: rgba(255, 255, 255, 1)"
+  >
+    <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
+  </svg>
+  Add Category
+</button>
+
+<div
+  class="lightbox"
+  [style]="{ display: !isOpened ? 'none' : 'flex' }"
+  (click)="closeCategoryDialog()"
+></div>
+<div class="categoryModal" [style]="{ display: !isOpened ? 'none' : 'block' }">
+  <h1 class="modal_title">Create New Category</h1>
+  <p class="modal_kicker">
+    Products are tied to categories when displaying them.
+  </p>
+
+  <form
+    [formGroup]="categoryForm"
+    class="create-category"
+    (ngSubmit)="onSubmit()"
+  >
+    <label for="categoryName">Category Name</label>
+    <input
+      type="text"
+      formControlName="categoryName"
+      placeholder="Enter category name"
+    />
+    <button type="submit">Create Category</button>
+  </form>
+</div>
