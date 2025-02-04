@@ -85,3 +85,62 @@
             &:hover
                 background-color: lighten($text-main, 10%)
     
+table
+    width: 100%
+
+    th
+        text-align: left
+        font-size: 14px
+        font-weight: 600
+        width: 100%
+        border-bottom: solid 1px $gray-hover
+
+    th, td
+        padding: 8px 12px
+
+    td
+        border-bottom: solid 1px $gray-hover
+
+    td button
+        border: none
+        background: none
+        cursor: pointer
+
+        &:hover svg path
+            fill: $text-secondary
+
+.delete-category
+        margin: 24px 0 0 0
+
+        label
+            font-size: 14px
+            display: block
+            margin: 0 0 8px 0
+
+            &:focus
+                border: solid 1px $text-secondary
+        .buttons
+            @include flexbox($justify: null, $align: center, $gap: 8px, $direction: row)
+            
+            .cancel
+                font-size: 14px
+                background-color: $bg-gray
+                border: none
+                padding: 8px 12px
+                border-radius: 4px
+                cursor: pointer
+
+                &:hover
+                    background-color: darken($bg-gray, 10%)
+                
+            .deleteCategory
+                font-size: 14px
+                color: white
+                background-color: #ff4d4d
+                border: none
+                padding: 8px 12px
+                border-radius: 4px
+                cursor: pointer
+
+                &:hover
+                    background-color: #ff7e7e
