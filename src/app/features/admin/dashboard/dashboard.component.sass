@@ -7,6 +7,7 @@ main
     background-color: $bg-gray
     height: 100%
     @include flexbox($justify: null, $align: null, $direction: row)
+    overflow: hidden
     
 
     .content
@@ -15,3 +16,4 @@ main
         margin: 16px
         border-radius: 8px
         padding: 24px
+        overflow-y: auto

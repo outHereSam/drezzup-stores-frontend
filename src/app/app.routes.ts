@@ -51,6 +51,13 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'brands',
+        loadComponent: () =>
+          import('./features/admin/brands/brands.component').then(
+            (c) => c.BrandsComponent
+          ),
+      },
+      {
         path: 'orders',
         loadComponent: () =>
           import('./features/admin/orders/orders.component').then(
