@@ -18,9 +18,7 @@ export const routes: Routes = [
   {
     path: '',
     loadComponent: () =>
-      import('./features/home/home/home.component').then(
-        (c) => c.HomeComponent
-      ),
+      import('./homepage/homepage.component').then((c) => c.HomepageComponent),
   },
   {
     path: 'admin',
@@ -55,6 +53,13 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/admin/brands/brands.component').then(
             (c) => c.BrandsComponent
+          ),
+      },
+      {
+        path: 'models',
+        loadComponent: () =>
+          import('./features/admin/models/models.component').then(
+            (c) => c.ModelsComponent
           ),
       },
       {

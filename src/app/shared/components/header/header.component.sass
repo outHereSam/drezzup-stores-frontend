@@ -1,0 +1,58 @@
+@use '../../../../styles/_variables' as *
+@use '../../../../styles/_functions' as *
+@use '../../../../styles/_mixins' as *
+
+header
+    border-bottom: solid 1px $light-blue
+
+    nav
+        max-width: 940px
+        padding: 12px 0
+        margin: 0 auto
+        @include flexbox($justify: space-between, $align: center, $direction: row)
+
+        .left
+            @include flexbox($justify: null, $align: center, $gap: 24px, $direction: row)
+
+            .logo
+                font-size: 16px
+                font-weight: bold
+                text-transform: uppercase
+                text-decoration: none
+                color: $text-main
+
+            .navLinks
+                @include flexbox($justify: null, $align: center, $gap: 24px, $direction: row)
+
+                li
+                    list-style: none
+
+                    a
+                        text-decoration: none
+                        font-size: 14px
+                        color: $text-main
+
+                        &:hover
+                            border-bottom: solid 1px $text-main
+
+        .options
+            @include flexbox($justify: null, $align: center, $gap: 16px, $direction: row)
+
+            .search
+                @include flexbox($justify: center, $align: center, $direction: null)
+                border-radius: 50%
+                padding: 4px
+                cursor: pointer
+                border: none
+                background: none
+
+                &:hover
+                    background-color: $bg-gray
+
+            a
+                @include flexbox($justify: center, $align: center, $direction: null)
+                padding: 4px
+                border-radius: 50%
+
+                &:hover
+                    background-color: $bg-gray

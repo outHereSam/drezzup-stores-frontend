@@ -1,0 +1,129 @@
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <div class="category">
+    <label for="category">Category</label>
+    <select formControlName="category">
+      @for (category of categories; track category.category_id) {
+      <option [value]="category.category_id">
+        {{ category.category_name }}
+      </option>
+      }
+    </select>
+    @if (productForm.get('category')?.invalid &&
+    (productForm.get('category')?.dirty ||
+    productForm.get('category')?.touched)) {
+    <p class="error-message">Category is required</p>
+    }
+  </div>
+
+  <div class="brand">
+    <label for="brand">Brand</label>
+    <select formControlName="brand">
+      @for (brand of brands; track brand.brand_id) {
+      <option [value]="brand.brand_id">{{ brand.brand_name }}</option>
+      }
+    </select>
+    @if (productForm.get('brand')?.invalid && (productForm.get('brand')?.dirty
+    || productForm.get('brand')?.touched)) {
+    <p class="error-message">Brand is required</p>
+    }
+  </div>
+
+  <div class="model">
+    <label for="model">Model</label>
+    <input type="text" formControlName="model" placeholder="eg. Air Max" />
+    @if (productForm.get('model')?.invalid && (productForm.get('model')?.dirty
+    || productForm.get('model')?.touched)) {
+    <p class="error-message">Model is required</p>
+    }
+  </div>
+
+  <div class="color">
+    <label for="color">Color</label>
+    <input type="text" formControlName="color" placeholder="eg. Wolf Grey" />
+    @if (productForm.get('color')?.invalid && (productForm.get('color')?.dirty
+    || productForm.get('color')?.touched)) {
+    <p class="error-message">
+      @if (productForm.get('color')?.errors?.['required']) { Color is required }
+      @if (productForm.get('color')?.errors?.['maxlength']) { Color must be max
+      50 characters }
+    </p>
+    }
+  </div>
+
+  <div class="size">
+    <label for="size">Size</label>
+    <input type="text" formControlName="size" placeholder="eg. 43" />
+    @if (productForm.get('size')?.invalid && (productForm.get('size')?.dirty ||
+    productForm.get('size')?.touched)) {
+    <p class="error-message">
+      @if (productForm.get('size')?.errors?.['required']) { Size is required }
+      @if (productForm.get('size')?.errors?.['maxlength']) { Size must be max 20
+      characters }
+    </p>
+    }
+  </div>
+
+  <div class="description">
+    <label for="description">Description</label>
+    <textarea formControlName="description"></textarea>
+    @if (productForm.get('description')?.invalid &&
+    (productForm.get('description')?.dirty ||
+    productForm.get('description')?.touched)) {
+    <p class="error-message">Description is required</p>
+    }
+  </div>
+
+  <div class="quantity">
+    <label for="quantity">Quantity</label>
+    <input type="number" formControlName="quantity" />
+    @if (productForm.get('quantity')?.invalid &&
+    (productForm.get('quantity')?.dirty ||
+    productForm.get('quantity')?.touched)) { @if
+    (productForm.get('quantity')?.errors?.['required']) {
+    <p class="error-message">Quantity is required</p>
+    } @if (productForm.get('quantity')?.errors?.['min']) {
+    <p class="error-message">Quantity must be 0 or greater</p>
+    } @if (productForm.get('quantity')?.errors?.['max']) {
+    <p class="error-message">Quantity cannot exceed 10000</p>
+    } }
+  </div>
+
+  <div class="price">
+    <label for="price">Price (GH₵)</label>
+    <input
+      type="number"
+      step="0.01"
+      min="0"
+      placeholder="0.00"
+      pattern="^\d*(\.\d{0,2})?$"
+      formControlName="price"
+    />
+    @if (productForm.get('price')?.invalid && (productForm.get('price')?.dirty
+    || productForm.get('price')?.touched)) {
+    <div class="error-message">
+      @if (productForm.get('price')?.errors?.['required']) {
+      <p class="error-message">Price is required</p>
+      } @if (productForm.get('price')?.errors?.['min']) {
+      <p class="error-message">Price must be 0 or greater</p>
+      } @if (productForm.get('price')?.errors?.['max']) {
+      <p class="error-message">Price cannot exceed 100000</p>
+      }
+    </div>
+    }
+  </div>
+
+  <div class="image-upload">
+    <label for="images">Upload Photos</label>
+    <app-image-uploader
+      [maxFileSizeMB]="10"
+      (filesChanged)="onFilesChanged($event)"
+    />
+  </div>
+
+  <div class="buttons">
+    <button class="cancel" type="button" (click)="closeProductDialog()">
+      Cancel
+    </button>
+    <button class="save" type="submit">Save</button>
+  </div>
+</form>

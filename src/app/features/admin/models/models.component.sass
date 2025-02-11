@@ -34,7 +34,7 @@
     top: 0
     left: 0
 
-.categoryModal
+.categoryModal 
     background-color: white
     position: absolute
     top: 50%
@@ -44,6 +44,7 @@
     padding: 24px
     border-radius: 8px
 
+
     .modal_title
         font-size: 20px
 
@@ -52,6 +53,46 @@
         margin: 8px 0 0 0
         color: $text-secondary
 
+    .create-category
+        margin: 24px 0 0 0
+
+        label
+            font-size: 14px
+            display: block
+            margin: 0 0 8px 0
+
+        input[type="text"], textarea
+            width: 100%
+            padding: 8px 12px
+            border: solid 1px $gray-hover
+            border-radius: 6px
+            outline: none
+
+            &:focus
+                border: solid 1px $text-secondary
+
+        .model-description
+            margin: 16px 0 0 0
+
+            textarea
+                field-sizing: content
+                min-height: 5lh
+                max-height: 10lh
+
+        button
+            font-size: 14px
+            color: white
+            background-color: $text-main
+            border: none
+            margin: 24px 0 0 0
+            padding: 8px 12px
+            border-radius: 4px
+            cursor: pointer
+            float: right
+
+            &:hover
+                background-color: lighten($text-main, 10%)
+    
 table
     width: 100%
 
@@ -59,7 +100,7 @@ table
         text-align: left
         font-size: 14px
         font-weight: 600
-        // width: 100%
+        width: 100%
         border-bottom: solid 1px $gray-hover
 
     th, td
@@ -75,6 +116,13 @@ table
 
         &:hover svg path
             fill: $text-secondary
+
+    .description-cell
+        max-width: 200px
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+
 .loader
     position: absolute
     top: 50%
@@ -82,18 +130,18 @@ table
     transform: translate(-50%, -50%)
 
 .delete-category
-    margin: 24px 0 0 0
+        margin: 24px 0 0 0
 
-    label
-        font-size: 14px
-        display: block
-        margin: 0 0 8px 0
+        label
+            font-size: 14px
+            display: block
+            margin: 0 0 8px 0
 
-        &:focus
-            border: solid 1px $text-secondary
+            &:focus
+                border: solid 1px $text-secondary
         .buttons
             @include flexbox($justify: null, $align: center, $gap: 8px, $direction: row)
-
+            
             .cancel
                 font-size: 14px
                 background-color: $bg-gray
@@ -104,7 +152,7 @@ table
 
                 &:hover
                     background-color: darken($bg-gray, 10%)
-
+                
             .deleteCategory
                 font-size: 14px
                 color: white

@@ -1,0 +1,74 @@
+@use '../../../../../styles/_variables' as *
+@use '../../../../../styles/_functions' as *
+@use '../../../../../styles/_mixins' as *
+
+.uploader-container
+    width: 100%
+
+    .drop-zone
+        // border: solid 1px pink
+        background-color: $light-blue
+        padding: 20px
+        border-radius: 8px
+        border: dashed 2px darken($light-blue, 15)
+        text-align: center
+        cursor: pointer
+        transition: border 0.3s ease-in
+
+    .drop-zone.dragover 
+        border-color: darken($light-blue, 30)
+        background: lighten($light-blue, 10)
+
+    .file-input
+        display: none
+
+    .upload-prompt
+        color: $text-main
+        font-size: 14px
+
+        .upload-button
+            border: none
+            background: none
+            cursor: pointer
+            color: #5b6eff
+            margin: 8px 0 0 0
+
+        .file-limit
+            color: $text-secondary
+            font-size: 12px
+            margin: 8px 0 0 0
+
+    .file-list
+        margin: 16px 0 0 0
+
+        ul
+            @include flexbox($justify: null, $align: null, $gap: 12px, $direction: column)
+            
+        
+
+        .file-item
+            @include flexbox($justify: space-between, $align: center, $gap: null, $direction: row)
+            border: solid 1px #e7e7e7
+            padding: 12px
+            border-radius: 8px
+            font-size: 14px
+            
+            .left
+                @include flexbox($justify: null, $align: center, $gap: 8px, $direction: row)
+                
+            .file-size
+                font-size: 12px
+
+            .remove
+                @include flexbox($justify: center, $align: center, $gap: null, $direction: null)
+                
+                width: 40px
+                height: 40px
+                border: none
+                padding: 8px
+                border-radius: 50%
+                cursor: pointer
+                background-color: $bg-gray
+
+                &:hover
+                    background: #e4e4e4
