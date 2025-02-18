@@ -1,0 +1,33 @@
+
+@use '../../../../styles/_variables' as *
+@use '../../../../styles/_functions' as *
+@use '../../../../styles/_mixins' as *
+
+footer
+    margin: 40px 0
+
+    .container
+        max-width: 940px
+        margin: 0 auto
+
+        ul
+            @include flexbox($justify: null, $align: center, $gap: 12px, $direction: row)
+            padding: 24px 0
+            border-bottom: solid 1px $light-blue
+            margin: 0 0 24px 0
+
+            li
+                list-style-type: none
+
+                a
+                    background-color: $light-blue
+                    padding: 6px
+                    border-radius: 50%
+                    @include flexbox($justify: center, $align: center, $gap: null, $direction: null)
+
+                    &:hover
+                        background-color: $bg-gray
+
+.kicker
+    font-size: 14px
+    color: $text-secondary
