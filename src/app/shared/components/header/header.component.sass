@@ -35,6 +35,7 @@ header
                         text-decoration: none
                         font-size: 14px
                         color: $text-main
+                        font-weight: 500
 
                         &:hover
                             border-bottom: solid 1px $text-main
@@ -60,3 +61,18 @@ header
 
                 &:hover
                     background-color: $bg-gray
+
+            .bag
+                position: relative
+
+                .badge
+                    position: absolute
+                    bottom: 1px
+                    right: 2px
+                    font-size: 8px
+                    background-color: $text-main
+                    color: white
+                    width: 12px
+                    height: 12px
+                    border-radius: 50%
+                    @include flexbox($justify: center, $align: center, $gap: null, $direction: null)

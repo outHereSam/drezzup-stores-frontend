@@ -11,6 +11,8 @@ import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { AuthResponse } from '../models/authResponse.model';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { jwtDecode } from 'jwt-decode';
+import { CustomJwtPayload } from '../models/jwt.model';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +23,7 @@ export class AuthService {
   // Initialize signals with null to avoid accessing localStorage too early.
   private accessToken = signal<string | null>(null);
   private refreshToken = signal<string | null>(null);
+  private authInitialized = signal(false);
 
   isAuthenticated = computed(() => !!this.accessToken());
 
@@ -35,6 +38,7 @@ export class AuthService {
       const refresh = localStorage.getItem('refreshToken');
       this.accessToken.set(token);
       this.refreshToken.set(refresh);
+      this.authInitialized.set(true);
     }
   }
 
@@ -90,5 +94,22 @@ export class AuthService {
 
   getAccessToken(): string | null {
     return this.accessToken();
+  }
+
+  getDecodedAccessToken(): CustomJwtPayload | null {
+    const token = this.getAccessToken();
+    if (!token) {
+      return null;
+    }
+    try {
+      return jwtDecode<CustomJwtPayload>(token);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  }
+
+  isAuthInitialized() {
+    return this.authInitialized();
   }
 }

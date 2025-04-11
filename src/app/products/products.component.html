@@ -1,0 +1,17 @@
+<app-header />
+<main>
+  <div class="container">
+    <h1 class="pageTitle">{{ categoryName }}</h1>
+    <div class="productList">
+      @if (products$ | async; as products) { @for (product of products; track
+      product.product_id) {
+      <app-product-card
+        [product]="product"
+        (click)="navigateToProduct(product.product_id)"
+      />
+      } }
+    </div>
+  </div>
+</main>
+
+<app-footer />

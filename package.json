@@ -22,6 +22,8 @@
     "@angular/router": "^19.0.0",
     "@angular/ssr": "^19.1.6",
     "express": "^4.18.2",
+    "jwt-decode": "^4.0.0",
+    "lucide-angular": "^0.487.0",
     "notyf": "^3.10.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

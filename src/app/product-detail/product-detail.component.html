@@ -1,0 +1,63 @@
+<app-header />
+
+<main>
+  <div class="container">
+    @if (product$ | async; as product) {
+    <div class="productDetail">
+      <div class="imageGallery">
+        <div class="smalls">
+          @for (image of product.images; track $index) {
+          <div class="thumbnail">
+            <img [src]="image" [alt]="product.model_name" />
+          </div>
+          }
+        </div>
+        <div class="large">
+          <img [src]="product.images[0]" [alt]="product.model_name" />
+        </div>
+      </div>
+      <div class="productInfo">
+        <h1 class="productName">
+          {{ product.brand_name }} {{ product.model_name }}
+        </h1>
+        <p class="price">GH₵ {{ product.price }}</p>
+        <p class="description">{{ product.model_description }}</p>
+
+        <div class="sizeSelector">
+          <h3>Select Size</h3>
+          <div class="sizeOptions">
+            @for (variant of product.variants; track variant.variant_id) {
+            <button
+              class="sizeButton"
+              [class.disabled]="variant.quantity === 0"
+              [disabled]="variant.quantity === 0"
+              (click)="selectSize(variant)"
+              [class.selected]="
+                selectedVariant()?.variant_id === variant.variant_id
+              "
+            >
+              {{ variant.size }}
+              @if (variant.quantity === 0) {
+              <span class="outOfStock">Out of Stock</span>
+              }
+            </button>
+            }
+          </div>
+        </div>
+
+        <hr />
+
+        <button
+          class="addToBag"
+          (click)="addToCart(product)"
+          [disabled]="!selectedVariant() || quantity() < 1"
+        >
+          Add to Bag
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+</main>
+
+<app-footer />

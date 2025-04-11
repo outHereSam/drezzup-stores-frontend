@@ -1,0 +1,51 @@
+@use '../../../../../styles/_variables' as *
+@use '../../../../../styles/_functions' as *
+@use '../../../../../styles/_mixins' as *
+
+main
+    padding: 84px 0 0 0
+
+    .container
+        max-width: 940px
+        margin: 0 auto
+
+        .pageTitle
+            margin: 0 0 12px 0
+
+        .cartItems
+
+            table
+                width: 100%
+
+                th, td
+                    text-align: left
+                    padding: 12px 0
+
+                tr
+                    border-bottom: solid 1px $gray-hover
+
+                td
+                    font-weight: 500
+
+                .item
+                    @include flexbox($justify: null, $align: center, $gap: 12px, $direction: row)
+
+                    .thumbnail
+                        width: 80px
+                        height: 80px
+
+                        img
+                            width: 100%
+                            height: 100%
+                            object-fit: cover
+
+                .quantity
+                    @include flexbox($justify: null, $align: center, $gap: 8px, $direction: null)
+
+                    button
+                        cursor: pointer
+                        font-size: 20px
+                        width: 40px
+                        height: 40px
+                        border: solid 1px $gray-hover
+                        background-color: $light-blue

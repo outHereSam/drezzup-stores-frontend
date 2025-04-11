@@ -1,0 +1,19 @@
+@use '../../styles/_variables' as *
+@use '../../styles/_functions' as *
+@use '../../styles/_mixins' as *
+
+main
+    padding: 84px 0 0 0
+
+    section
+        margin: 32px 0
+
+    .container
+        max-width: 940px
+        margin: 0 auto
+
+        .pageTitle
+            margin: 0 0 32px 0
+
+        .productList
+            @include flexbox($justify: null, $align: center, $gap: 24px, $direction: row)

@@ -1,0 +1,98 @@
+@use '../../styles/_variables' as *
+@use '../../styles/_functions' as *
+@use '../../styles/_mixins' as *
+
+main
+    padding: 84px 0 0 0
+
+    section
+        margin: 32px 0
+
+    .container
+        max-width: 940px
+        margin: 0 auto
+
+        .productDetail
+            @include flexbox($justify: space-between, $align: flex-start, $gap: 24px, $direction: row)
+
+        .imageGallery
+            @include flexbox($justify: null, $align: null, $gap: 16px, $direction: row)
+
+        .thumbnail
+            width: 90px
+            height: 90px
+            border-radius: 4px
+            overflow: hidden
+            cursor: pointer
+
+            &:hover
+                border: solid 1px $text-main
+
+            img
+                width: 100%
+                height: 100%
+                object-fit: cover
+
+        .large
+            height: 480px
+            width: 480px
+            border-radius: 4px
+            overflow: hidden
+
+            img
+                height: 100%
+                width: 100%
+                object-fit: cover
+
+        .productInfo
+
+            .productName
+                margin: 0 0 12px 0
+
+            .price
+                font-size: 14px
+                font-weight: 500
+
+            .description
+                margin: 24px 0 0 0
+                line-height: 28px
+
+            .sizeSelector
+                margin: 24px 0
+
+                h3
+                    font-size: 14px
+                    font-weight: 500
+                    margin: 0 0 12px 0
+
+                .sizeButton
+                    font-size: 16px
+                    font-weight: 700
+                    width: 48px
+                    height: 48px
+                    cursor: pointer
+                    background: none
+                    border: solid 2px $gray-hover
+
+                    &:hover
+                        // background-color: $gray-hover
+                        border-color: $text-secondary
+
+                .selected
+                    border-color: $text-main
+
+            hr
+                color: $bg-gray
+
+            .addToBag
+                cursor: pointer
+                margin: 24px 0
+                width: 100%
+                border: none
+                color: white
+                background-color: $text-main
+                padding: 12px 0
+                border-radius: 999px
+
+                &:hover
+                    background-color: $text-secondary

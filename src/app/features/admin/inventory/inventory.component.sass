@@ -52,29 +52,38 @@
         margin: 8px 0 0 0
         color: $text-secondary
 
-table
-    width: 100%
-
-    th
-        text-align: left
-        font-size: 14px
-        font-weight: 600
-        // width: 100%
-        border-bottom: solid 1px $gray-hover
-
-    th, td
-        padding: 8px 12px
-
-    td
-        border-bottom: solid 1px $gray-hover
-
-    td button
-        border: none
-        background: none
+.productList
+    .product
+        display: flex
+        align-items: center
+        gap: 8px
         cursor: pointer
+        border-bottom: solid 1px $bg-gray
+        padding: 8px 0
 
-        &:hover svg path
-            fill: $text-secondary
+        .productImage
+            width: 80px
+            height: 80px
+            overflow: hidden
+            border-radius: 4px
+
+            img
+                object-fit: cover
+                height: 100%
+                width: 100%
+
+        .productInfo
+            .productName
+                font-size: 16px
+                margin: 0 0 5px 0
+
+            .price
+                background-color: $gray-hover
+                padding: 4px
+                border-radius: 8px
+                font-size: 12px
+                color: $text-secondary
+
 .loader
     position: absolute
     top: 50%

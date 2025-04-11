@@ -5,12 +5,13 @@
 
 footer
     margin: 40px 0
+    padding-bottom: 2rem
 
     .container
         max-width: 940px
         margin: 0 auto
 
-        ul
+        ul.socials
             @include flexbox($justify: null, $align: center, $gap: 12px, $direction: row)
             padding: 24px 0
             border-bottom: solid 1px $light-blue
@@ -27,6 +28,20 @@ footer
 
                     &:hover
                         background-color: $bg-gray
+
+        ul.extraLinks
+            @include flexbox($justify: null, $align: center, $gap: 12px, $direction: row)
+            padding: 24px 0
+
+            li
+                list-style-type: none
+
+                a
+                    text-decoration: none
+                    color: $text-main
+
+                    &:hover
+                        text-decoration: underline
 
 .kicker
     font-size: 14px

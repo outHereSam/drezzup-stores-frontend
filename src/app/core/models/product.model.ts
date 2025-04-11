@@ -1,21 +1,19 @@
 export interface Product {
   product_id: number;
-  category_id: number;
+  brand_name: string;
+  model_name: string;
   category_name: string;
-  brand_id: number;
-  brand: string;
-  product_model_id: number;
-  model: string;
-  description: string | null;
+  model_description: string;
   price: number;
-  variants: Variant[];
-  images: string[] | null;
+  images: string[];
+  variants: ProductVariant[];
 }
 
-export interface Variant {
-  attribute_combo_id: number;
-  color: string | null;
-  size: string | null;
+export interface ProductVariant {
+  variant_id: number;
+  product_id: number;
+  color: string;
+  size: string;
   quantity: number;
 }
 

@@ -18,6 +18,10 @@ export class CategoryService {
       .pipe(map((data) => data.categories));
   }
 
+  getCategoryByCategoryName(categoryName: string): Observable<Category> {
+    return this.http.get<Category>(`${this.apiUrl}/${categoryName}`);
+  }
+
   createCategory(categoryName: string) {
     return this.http.post(this.apiUrl, { category_name: categoryName });
   }

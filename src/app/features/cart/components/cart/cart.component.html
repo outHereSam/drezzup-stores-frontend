@@ -1,0 +1,65 @@
+<app-header />
+<main>
+  <div class="container">
+    <h1 class="pageTitle">Bag</h1>
+
+    @if (cartService.getCartCount() < 1) {
+    <p class="kicker">There are no items in your bag</p>
+    } @else {
+    <div class="cartItems">
+      <table>
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (cartItem of cartService.getCartItems(); track
+          cartItem.product_id) {
+          <tr>
+            <td>
+              <div class="item">
+                <div class="thumbnail">
+                  <img [src]="cartItem.image" alt="" />
+                </div>
+                <div class="info">
+                  <h4 class="itemName">
+                    {{ cartItem.brand_name }} {{ cartItem.model_name }}
+                  </h4>
+
+                  <p class="size">Size: {{ cartItem.size }}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="quantity">
+                <button
+                  (click)="
+                    updateQuantity(cartItem.variant_id, cartItem.quantity - 1)
+                  "
+                >
+                  -
+                </button>
+                <span>{{ cartItem.quantity }}</span>
+                <button
+                  (click)="
+                    updateQuantity(cartItem.variant_id, cartItem.quantity + 1)
+                  "
+                  [disabled]="cartItem.quantity >= cartItem.maxStock"
+                >
+                  +
+                </button>
+              </div>
+            </td>
+            <td>GH₵{{ cartItem.price }}</td>
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+    }
+  </div>
+</main>
+<app-footer />

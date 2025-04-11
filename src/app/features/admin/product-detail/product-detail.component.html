@@ -1,0 +1,118 @@
+<main>
+  <button class="back" routerLink="/admin/inventory">
+    <lucide-icon [img]="ChevronLeft" [size]="16"></lucide-icon>Back to Products
+  </button>
+
+  @if (product$ | async; as product) {
+  <div class="header">
+    <div class="product_name">
+      <span class="product_id">#{{ product.product_id | zeroPad : 3 }}</span>
+      <h1 class="title">{{ product.brand_name }} {{ product.model_name }}</h1>
+    </div>
+
+    <div class="options">
+      <button class="menu" (click)="toggleOptions()">
+        <lucide-icon
+          [img]="EllipsisIcon"
+          [size]="24"
+          color="#0F172A"
+        ></lucide-icon>
+      </button>
+
+      <div
+        class="menu_options"
+        [style.display]="isOptionsOpened ? 'block' : 'none'"
+      >
+        <a routerLink="/inventory/:id/update"
+          ><lucide-icon
+            [img]="PencilIcon"
+            [size]="14"
+            color="#0F172A"
+          ></lucide-icon>
+          Update Product</a
+        >
+        <a>
+          <lucide-icon
+            [img]="Trash2Icon"
+            [size]="14"
+            color="#ff3d3d"
+          ></lucide-icon>
+
+          Delete Product
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <section class="content">
+    <h3 class="sectionTitle">Details</h3>
+    <table>
+      <tr>
+        <td class="property">Brand</td>
+        <td>{{ product.brand_name }}</td>
+      </tr>
+      <tr>
+        <td class="property">Name</td>
+        <td>{{ product.model_name }}</td>
+      </tr>
+      <tr>
+        <td class="property">Category</td>
+        <td>{{ product.category_name }}</td>
+      </tr>
+      <tr>
+        <td class="property">Description</td>
+        <td>{{ product.model_description }}</td>
+      </tr>
+      <tr>
+        <td class="property">Price</td>
+        <td>GH₵{{ product.price }}</td>
+      </tr>
+    </table>
+  </section>
+
+  <section class="images">
+    <h3 class="sectionTitle">Images</h3>
+    @for (image of product.images; track $index) {
+    <div>
+      <img [src]="image" alt="" />
+      <button class="delete_image">
+        <lucide-icon
+          [img]="Trash2Icon"
+          [size]="24"
+          color="#71717A"
+        ></lucide-icon>
+      </button>
+    </div>
+    }
+  </section>
+
+  <section class="variants">
+    <h3>Variants</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Color</th>
+          <th>Size</th>
+          <th>Quantity</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @for (variant of product.variants; track variant.variant_id) {
+
+        <tr>
+          <td>{{ variant.color }}</td>
+          <td>{{ variant.size }}</td>
+          <td>{{ variant.quantity }}</td>
+          <button class="deleteVariant">
+            <lucide-angular [img]="Trash2Icon" [size]="16"></lucide-angular>
+          </button>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  }
+</main>

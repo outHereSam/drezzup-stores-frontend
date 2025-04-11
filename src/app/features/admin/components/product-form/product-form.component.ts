@@ -61,6 +61,10 @@ export class ProductFormComponent {
     this.brandService.getBrands().subscribe((brands) => (this.brands = brands));
   }
 
+  private loadProducts() {
+    this.productsService.getProducts().subscribe();
+  }
+
   closeProductDialog(): void {
     this.closeProductDialogEvent.emit(false);
     this.productForm.reset();
@@ -93,6 +97,7 @@ export class ProductFormComponent {
           this.notyf.success('Product created successfully!');
           this.closeProductDialog();
           // TODO: load products here
+          this.loadProducts();
         },
         error: (error) => {
           this.notyf.error('Failed to create product');
