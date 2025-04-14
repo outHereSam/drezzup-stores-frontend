@@ -130,7 +130,11 @@
     <form [formGroup]="editProductForm" (ngSubmit)="updateProduct()">
       <label>
         Brand Name:
-        <input type="text" formControlName="brand_name" />
+        <select formControlName="brand_name">
+          <option *ngFor="let brand of brands" [value]="brand.brand_name">
+            {{ brand.brand_name }}
+          </option>
+        </select>
       </label>
       <label>
         Model Name:

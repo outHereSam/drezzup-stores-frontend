@@ -66,6 +66,10 @@ main
     .content
         border-top: solid 1px $light-blue
         padding: 24px 0
+        position: relative
+        &.loading
+            opacity: 0.7
+            pointer-events: none
 
         .sectionTitle
             margin: 0 0 18px 0
@@ -167,7 +171,6 @@ main
             border: none
             background: none
             cursor: pointer
-        
 
     form
         border-top: solid 1px $bg-gray
@@ -194,7 +197,6 @@ main
             &:focus
                 border: solid 1px $text-secondary
 
-        
         textarea
             font-size: 14px
 
@@ -205,7 +207,7 @@ main
 
 .variantInputs
     @include flexbox($justify: _, $align: center, $gap: 10px, $direction: row)
-    
+
 .addVariant
     width: 100%
     padding: 8px 0
@@ -226,7 +228,6 @@ main
 
     &:hover
         background-color: $gray-hover
-
 
 .buttons
     float: right
@@ -255,3 +256,29 @@ main
 
         &:hover
             background-color: lighten($text-main, 10 )
+
+.loading-overlay
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    background-color: rgba(255, 255, 255, 0.8)
+    z-index: 10
+
+.spinner
+    width: 40px
+    height: 40px
+    border: 4px solid rgba(0, 0, 0, 0.1)
+    border-radius: 50%
+    border-top-color: #0F172A
+    animation: spin 1s ease-in-out infinite
+    margin-bottom: 10px
+
+@keyframes spin
+    to
+        transform: rotate(360deg)

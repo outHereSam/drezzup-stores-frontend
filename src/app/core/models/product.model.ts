@@ -7,6 +7,9 @@ export interface Product {
   price: number;
   images: string[];
   variants: ProductVariant[];
+  category_id: number;
+  brand_id: number;
+  product_model_id: number;
 }
 
 export interface ProductVariant {

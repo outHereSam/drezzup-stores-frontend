@@ -1,7 +1,14 @@
-import { Component, effect, HostListener, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  effect,
+  HostListener,
+  Inject,
+  inject,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { Product } from '../../../core/models/product.model';
+import { Product, ProductVariant } from '../../../core/models/product.model';
 import { ProductsService } from '../../../core/services/products.service';
 import { CommonModule } from '@angular/common';
 import {
@@ -20,6 +27,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { BrandService } from '../../../core/services/brand.service';
+import { Brand } from '../../../core/models/brand.model';
+import { NOTYF } from '../../../shared/utils/notyf.token';
+import { Notyf } from 'notyf';
 
 @Component({
   selector: 'app-product-detail',
@@ -36,6 +47,7 @@ import {
 export class ProductDetailComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private productsService = inject(ProductsService);
+  private brandService = inject(BrandService);
   private fb = inject(FormBuilder);
 
   selectedId!: number;
@@ -44,12 +56,15 @@ export class ProductDetailComponent implements OnInit {
   isEditModalOpen = false;
   product!: Product;
   editProductForm!: FormGroup;
+  brands: Brand[] = [];
 
   readonly ChevronLeft = ChevronLeft;
   readonly Trash2Icon = Trash2Icon;
   readonly EllipsisIcon = EllipsisIcon;
   readonly PencilIcon = PencilIcon;
   readonly CircleXIcon = CircleXIcon;
+
+  constructor(@Inject(NOTYF) private notyf: Notyf) {}
 
   ngOnInit(): void {
     this.product$ = this.route.paramMap.pipe(
@@ -62,6 +77,8 @@ export class ProductDetailComponent implements OnInit {
       this.product = product;
       this.initForm();
     });
+
+    this.brandService.getBrands().subscribe((brands) => (this.brands = brands));
   }
 
   initForm(): void {
@@ -135,15 +152,53 @@ export class ProductDetailComponent implements OnInit {
   updateProduct(): void {
     if (this.editProductForm.valid) {
       const updatedProduct = this.editProductForm.value;
-      console.log('Updated product:', updatedProduct);
 
-      // Perform the update logic here (e.g., send the updated data to the server)
-      // this.product = { ...updatedProduct };
+      const payload = {
+        product_id: this.selectedId,
+        category: this.product.category_id, // Keep existing category
+        brand: this.product.brand_id, // Keep existing brand
+        product_model_id: this.product.product_model_id, // Keep existing model ID
+        price: updatedProduct.price,
+        model_name: updatedProduct.model_name,
+        model_description: updatedProduct.model_description,
+        variants: updatedProduct.variants.map((variant: any) => ({
+          variant_id: variant.variant_id || null,
+          color: variant.color,
+          size: variant.size,
+          quantity: variant.quantity,
+        })),
+      };
 
-      // Close the modal
-      // this.closeEditModal();
+      console.log('Payload to send to the backend:', payload);
+
+      // Call the service to update the product
+      this.productsService.updateProduct(this.selectedId, payload).subscribe({
+        next: (updatedProduct) => {
+          // Close the modal
+          this.notyf.success('Produc updated successfully');
+          this.closeEditModal();
+
+          // Refresh the product data by recalling the method that fetches the product data
+          this.refreshProductData();
+        },
+        error: (error) => {
+          this.notyf.error('Error updating product');
+        },
+      });
     } else {
       console.log('Form is invalid');
     }
+  }
+
+  // Method to refresh the product data
+  refreshProductData(): void {
+    // Re-fetch the product data
+    this.product$ = this.productsService.getProductById(this.selectedId);
+
+    // Update the local product data when the new data arrives
+    this.product$.subscribe((product) => {
+      this.product = product;
+      this.initForm();
+    });
   }
 }

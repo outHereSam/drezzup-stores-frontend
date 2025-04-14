@@ -28,6 +28,10 @@ export class ProductsService {
     return this.http.post(this.apiUrl, product);
   }
 
+  updateProduct(productId: number, productData: any): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrl}/${productId}`, productData);
+  }
+
   deleteProduct(productId: number) {
     return this.http.delete(`${this.apiUrl}/${productId}`);
   }
