@@ -23,15 +23,15 @@
         class="menu_options"
         [style.display]="isOptionsOpened ? 'block' : 'none'"
       >
-        <a routerLink="/inventory/:id/update"
-          ><lucide-icon
+        <button (click)="openEditModal()">
+          <lucide-icon
             [img]="PencilIcon"
             [size]="14"
             color="#0F172A"
           ></lucide-icon>
-          Update Product</a
-        >
-        <a>
+          Update Product
+        </button>
+        <button>
           <lucide-icon
             [img]="Trash2Icon"
             [size]="14"
@@ -39,7 +39,7 @@
           ></lucide-icon>
 
           Delete Product
-        </a>
+        </button>
       </div>
     </div>
   </div>
@@ -94,7 +94,6 @@
           <th>Color</th>
           <th>Size</th>
           <th>Quantity</th>
-          <th></th>
         </tr>
       </thead>
 
@@ -105,9 +104,6 @@
           <td>{{ variant.color }}</td>
           <td>{{ variant.size }}</td>
           <td>{{ variant.quantity }}</td>
-          <button class="deleteVariant">
-            <lucide-angular [img]="Trash2Icon" [size]="16"></lucide-angular>
-          </button>
         </tr>
         }
       </tbody>
@@ -116,3 +112,78 @@
 
   }
 </main>
+
+<!-- Modal for editing product -->
+<div
+  class="lightbox"
+  [style]="{ display: !isEditModalOpen ? 'none' : 'flex' }"
+  (click)="isEditModalOpen = false"
+></div>
+<div *ngIf="isEditModalOpen">
+  <div class="modal">
+    <div class="modalHeader">
+      <h3>Edit Product</h3>
+      <button class="cancel" (click)="closeEditModal()">
+        <lucide-angular [img]="CircleXIcon"></lucide-angular>
+      </button>
+    </div>
+    <form [formGroup]="editProductForm" (ngSubmit)="updateProduct()">
+      <label>
+        Brand Name:
+        <input type="text" formControlName="brand_name" />
+      </label>
+      <label>
+        Model Name:
+        <input type="text" formControlName="model_name" />
+      </label>
+
+      <label>
+        Description:
+        <textarea rows="6" formControlName="model_description"></textarea>
+      </label>
+      <label>
+        Price:
+        <input type="number" formControlName="price" />
+      </label>
+
+      <h4>Variants</h4>
+      <div class="variants" formArrayName="variants">
+        <div
+          class="variantInputs"
+          *ngFor="let variant of variants.controls; let i = index"
+          [formGroupName]="i"
+        >
+          <label>
+            Color:
+            <input type="text" formControlName="color" />
+          </label>
+          <label>
+            Size:
+            <input type="text" formControlName="size" />
+          </label>
+          <label>
+            Quantity:
+            <input type="number" formControlName="quantity" />
+          </label>
+          <button
+            class="removeVariant"
+            type="button"
+            (click)="removeVariant(i)"
+          >
+            <lucide-angular [img]="Trash2Icon" [size]="16"></lucide-angular>
+          </button>
+        </div>
+        <button class="addVariant" type="button" (click)="addVariant()">
+          + Add Variant
+        </button>
+      </div>
+
+      <div class="buttons">
+        <button class="save" type="submit">Save</button>
+        <button class="cancel" type="button" (click)="closeEditModal()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
