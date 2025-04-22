@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product.model';
+import { Product, Tag } from '../models/product.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -34,5 +34,13 @@ export class ProductsService {
 
   deleteProduct(productId: number) {
     return this.http.delete(`${this.apiUrl}/${productId}`);
+  }
+
+  getTags(): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`${environment.apiUrl}/tags`);
+  }
+
+  updateProductTag(payload: { product_id: number; tag_id: number | null }) {
+    return this.http.patch(`${this.apiUrl}/${payload.product_id}/tag`, payload);
   }
 }

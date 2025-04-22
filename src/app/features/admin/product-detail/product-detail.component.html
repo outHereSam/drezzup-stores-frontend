@@ -45,6 +45,26 @@
   </div>
 
   <section class="content">
+    <div class="toggles">
+      <label class="switch">
+        <input
+          type="checkbox"
+          [checked]="product?.tag_name === 'featured'"
+          (change)="toggleTag('featured', $any($event.target).checked)"
+        />
+        <span class="slider"></span>
+        Featured
+      </label>
+      <label class="switch">
+        <input
+          type="checkbox"
+          [checked]="product?.tag_name === 'trending'"
+          (change)="toggleTag('trending', $any($event.target).checked)"
+        />
+        <span class="slider"></span>
+        Trending
+      </label>
+    </div>
     <h3 class="sectionTitle">Details</h3>
     <table>
       <tr>

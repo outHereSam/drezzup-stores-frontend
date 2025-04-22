@@ -9,6 +9,7 @@ export interface Product {
   variants: ProductVariant[];
   category_id: number;
   brand_id: number;
+  tag_name: string;
   product_model_id: number;
 }
 
@@ -28,4 +29,9 @@ export interface ProductResponse {
   product_model_id: number;
   price: number;
   quantity: number;
+}
+
+export interface Tag {
+  tag_id: number;
+  tag_name: string;
 }

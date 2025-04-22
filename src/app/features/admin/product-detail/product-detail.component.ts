@@ -8,7 +8,11 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
-import { Product, ProductVariant } from '../../../core/models/product.model';
+import {
+  Product,
+  ProductVariant,
+  Tag,
+} from '../../../core/models/product.model';
 import { ProductsService } from '../../../core/services/products.service';
 import { CommonModule } from '@angular/common';
 import {
@@ -57,6 +61,7 @@ export class ProductDetailComponent implements OnInit {
   product!: Product;
   editProductForm!: FormGroup;
   brands: Brand[] = [];
+  tags: Tag[] = [];
 
   readonly ChevronLeft = ChevronLeft;
   readonly Trash2Icon = Trash2Icon;
@@ -79,6 +84,10 @@ export class ProductDetailComponent implements OnInit {
     });
 
     this.brandService.getBrands().subscribe((brands) => (this.brands = brands));
+
+    this.productsService.getTags().subscribe((tags) => {
+      this.tags = tags;
+    });
   }
 
   initForm(): void {
@@ -175,7 +184,7 @@ export class ProductDetailComponent implements OnInit {
       this.productsService.updateProduct(this.selectedId, payload).subscribe({
         next: (updatedProduct) => {
           // Close the modal
-          this.notyf.success('Produc updated successfully');
+          this.notyf.success('Product updated successfully');
           this.closeEditModal();
 
           // Refresh the product data by recalling the method that fetches the product data
@@ -199,6 +208,33 @@ export class ProductDetailComponent implements OnInit {
     this.product$.subscribe((product) => {
       this.product = product;
       this.initForm();
+    });
+  }
+
+  toggleTag(tagName: string, isChecked: boolean): void {
+    // Find the tag ID dynamically based on the tag name
+    const tag = this.tags.find((t) => t.tag_name === tagName);
+    const tagId = isChecked ? tag?.tag_id : null;
+
+    if (tagId === undefined) {
+      this.notyf.error(`Tag "${tagName}" not found.`);
+      return;
+    }
+
+    const payload = {
+      product_id: this.selectedId,
+      tag_id: tagId,
+    };
+
+    this.productsService.updateProductTag(payload).subscribe({
+      next: () => {
+        this.notyf.success(`${tagName} status updated successfully.`);
+        this.refreshProductData();
+      },
+      error: (error) => {
+        console.error(`Error updating ${tagName} tag:`, error);
+        this.notyf.error(`Failed to update ${tagName} status.`);
+      },
     });
   }
 }
