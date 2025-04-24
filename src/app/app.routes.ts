@@ -30,11 +30,18 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard, adminGuard],
     children: [
+      // {
+      //   path: '',
+      //   loadComponent: () =>
+      //     import('./features/admin/analytics/analytics.component').then(
+      //       (c) => c.AnalyticsComponent
+      //     ),
+      // },
       {
         path: '',
         loadComponent: () =>
-          import('./features/admin/analytics/analytics.component').then(
-            (c) => c.AnalyticsComponent
+          import('./features/admin/inventory/inventory.component').then(
+            (c) => c.InventoryComponent
           ),
       },
       {
