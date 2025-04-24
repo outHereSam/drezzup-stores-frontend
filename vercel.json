@@ -3,16 +3,24 @@
   "builds": [
     {
       "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist/drezzup-stores-frontend/browser"
-      }
+      "use": "@vercel/node"
+    },
+    {
+      "src": "dist/drezzup-stores-frontend/server/server.mjs",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
+      "src": "/assets/(.*)",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "continue": true
+    },
+    {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/dist/drezzup-stores-frontend/server/server.mjs"
     }
   ]
 }

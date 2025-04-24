@@ -4,10 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && ng run drezzup-stores-frontend:server:production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:drezzup-stores-frontend": "node dist/drezzup-stores-frontend/server/server.mjs"
+    "serve:ssr": "node dist/drezzup-stores-frontend/server/server.mjs",
+    "build:ssr": "ng build && ng run drezzup-stores-frontend:server",
+    "prerender": "ng run drezzup-stores-frontend:prerender"
   },
   "private": true,
   "dependencies": {
